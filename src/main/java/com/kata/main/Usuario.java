@@ -10,70 +10,49 @@ package com.kata.main;
  */
 public class Usuario {
     private String id;
-    private String fullName;
+    private String full_Name;
     private String email;
     private String nickname;
-    
-    public static void iniciarSesion(){
-        
-    }
-    
-    public static void registrarse(){
-        
-    }
+    private String token;
 
-    /**
-     * @return the id
-     */
     public String getId() {
         return id;
     }
-
-    /**
-     * @param id the id to set
-     */
+  
     public void setId(String id) {
         this.id = id;
     }
+    
+    public String getToken() {
+        return token;
+    }
+  
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-    /**
-     * @return the fullName
-     */
     public String getFullName() {
-        return fullName;
+        return full_Name;
     }
 
-    /**
-     * @param fullName the fullName to set
-     */
+
     public void setFullName(String fullName) {
-        this.fullName = fullName;
+        this.full_Name = fullName;
     }
 
-    /**
-     * @return the email
-     */
+ 
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * @return the nickname
-     */
     public String getNickname() {
         return nickname;
     }
 
-    /**
-     * @param nickname the nickname to set
-     */
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }

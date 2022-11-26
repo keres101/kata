@@ -6,16 +6,14 @@
 package com.kata.main;
 
 import com.kata.main.GUI.Login;
+import com.kata.main.GUI.Principal;
 
-/**
- *
- * @author keres
- */
 public class Kata {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        //System.out.println("Hello World!");
         Login login=new Login();
         login.setVisible(true);
+        
     }
 }

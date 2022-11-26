@@ -5,7 +5,10 @@
 package com.kata.main.GUI;
 
 import com.kata.main.Server;
+import com.kata.main.Usuario;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -189,7 +192,35 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String email=inputCorreo.getText();
         String contrasena=inputContrasena.getText();
-        Server.iniciarSesion(email, contrasena);
+        Usuario usuario = Server.iniciarSesion(email, contrasena);
+        
+        
+        if(usuario == null){
+            JOptionPane.showMessageDialog(rootPane, "Nombre y/o Usuario incorrecto","Error",0);
+        }else{
+            this.dispose();
+            Principal p = new Principal(usuario);
+            p.setVisible(true);
+            
+            /*
+            Chat[] arrayChats = Server.chats(usuario.getToken());
+            if(arrayChats.length != 0){
+                /*
+                for(int i = 0; i < arrayChats.length;i++){
+                    if(arrayChats[i].isDuo()){
+                        String member1 = arrayChats[i].getMembers()[0].getNickname();
+                        if(member1.equals(usuario.getNickname())){
+                            arrayChats[i].setName(arrayChats[i].getMembers()[1].getNickname());
+                        }else{
+                            arrayChats[i].setName(member1);
+                        }
+                    }
+                }
+                
+            }else{
+                System.out.println("No hay chats");
+            }*/
+        }
     }//GEN-LAST:event_btnIngresarMouseClicked
 
     private void btnRegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseClicked
