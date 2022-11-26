@@ -5,7 +5,7 @@
 
 package com.kata.main;
 
-import com.kata.main.GUI.Login;
+import com.kata.main.GUI.Registrarse;
 
 /**
  *
@@ -15,7 +15,9 @@ public class Kata {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        Login login=new Login();
-        login.setVisible(true);
+        //Login login=new Login();
+        //login.setVisible(true);
+        Registrarse register = new Registrarse();
+        register.setVisible(true);
     }
 }
