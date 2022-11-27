@@ -134,8 +134,7 @@ public class Server {
 
             Response response = client.newCall(request).execute();
             String data = response.body().string();
-            
-            
+
             System.out.println(data);
             if (response.code() == 200) {
                 Gson gson = new Gson();
@@ -147,7 +146,7 @@ public class Server {
 
         } catch (IOException err) {
             System.out.println(err);
-            
+
             return null;
         }
     }
@@ -176,6 +175,48 @@ public class Server {
                 return false;
             }
         } catch (IOException err) {
+            return false;
+        }
+    }
+
+    public static boolean crearChat(String token, String name, String[] members) {
+        try {
+
+            OkHttpClient client = new OkHttpClient();
+            MediaType mediaType = MediaType.parse("application/json");
+            String jbo = "[";
+            for (int i = 0; i < members.length; i++) {
+                String coma = ",";
+                if (i == members.length - 1) {
+                    coma = "";
+                }
+                jbo += "\"" + members[i] + "\"" + coma;
+            }
+            jbo += "]";
+            jbo = "{\n"
+                    + "\"name\":\"" + name + "\"\n,"
+                    + "\"members\":" + jbo
+                    + "}";
+            System.out.println(jbo);
+
+            RequestBody body = RequestBody.create(mediaType,
+                    jbo
+            );
+            Request req = new Request.Builder()
+                    .url("http://localhost:3000/api/v1/user/chat/create")
+                    .method("POST", body)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", "Bearer " + token)
+                    .build();
+            Response response = client.newCall(req).execute();
+            System.out.println(response.body().string());
+            if (response.code() == 200) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch(IOException err){
             return false;
         }
     }
