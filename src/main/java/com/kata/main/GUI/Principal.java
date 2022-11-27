@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtChat = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         panelBotones = new javax.swing.JPanel();
@@ -38,9 +38,9 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtChat.setColumns(20);
+        txtChat.setRows(5);
+        jScrollPane1.setViewportView(txtChat);
 
         jButton1.setText("Enviar");
 
@@ -106,15 +106,15 @@ public class Principal extends javax.swing.JFrame {
 
     private void AddFriendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddFriendActionPerformed
         
-        AddFriendChat add = new AddFriendChat(usuario);
+        AddFriendChat add = new AddFriendChat(usuario);   
         add.setVisible(true);
-        
+        this.dispose();
     }//GEN-LAST:event_AddFriendActionPerformed
 
     
     public void MostrarBotonesChats(Usuario user){
         Chat[] arrayChats = Server.chats(user.getToken());
-        if(arrayChats.length != 0){
+        if(arrayChats !=null && arrayChats.length != 0){
             JButton []arrayBotones = new JButton[arrayChats.length];
             for(int i = 0; i < arrayChats.length;i++){
                     
@@ -158,15 +158,26 @@ public class Principal extends javax.swing.JFrame {
     
     public void ObtenerIdChat(ActionEvent e)
     {
-        System.out.println("Soy el boton Nro : " + e.getActionCommand());
+        System.out.println("Consultando chatId : " + e.getActionCommand());
+        
+        Chat chat=Server.obtenerMensajes(e.getActionCommand(), usuario.getToken());
+        if(chat.getMessages() !=null && chat.getMessages().length >0){
+            for(int i=0;i<chat.getMessages().length;i++){
+                String textBefore=txtChat.getText();
+                String newMessage=chat.getMessages()[i].getContent();
+                txtChat.setText(textBefore+newMessage+"\n");
+            }
+        }
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddFriend;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panelBotones;
+    private javax.swing.JTextArea txtChat;
     // End of variables declaration//GEN-END:variables
 }

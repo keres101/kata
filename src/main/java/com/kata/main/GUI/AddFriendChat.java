@@ -87,7 +87,6 @@ public class AddFriendChat extends javax.swing.JFrame {
         if(respuesta){
             JOptionPane.showMessageDialog(rootPane, "Agregado con exito","Exitoso",1);
             this.dispose();
-            this.dispose();
             Principal p = new Principal(usuario);
             p.setVisible(true);
         }else{

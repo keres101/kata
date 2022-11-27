@@ -75,55 +75,85 @@ public class Server {
                     .build();
             Response response = client.newCall(req).execute();
             int status = response.code();
-            String res = response.body().string();          
+            String res = response.body().string();
             Usuario usuario = new Usuario();
             if (status == 200) {
                 Gson gson = new Gson();
                 usuario = gson.fromJson(res, Usuario.class);
-                
+
                 return usuario;
-            }else{
+            } else {
                 return null;
             }
-            
+
         } catch (IOException err) {
             System.out.println(err);
             return null;
         }
     }
-    
-    public static Chat[] chats(String token){
-        
-        try{
+
+    public static Chat[] chats(String token) {
+
+        try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url("http://127.0.0.1:3000/api/v1/user/chat")
                     .get()
                     .addHeader("Content-type", "aplication/json")
-                    .addHeader("Authorization", "Bearer "+token)
+                    .addHeader("Authorization", "Bearer " + token)
                     .build();
 
             Response response = client.newCall(request).execute();
             String data = response.body().string();
 
-            if(response.code() == 200){
+            if (response.code() == 200) {
                 Gson gson = new Gson();
                 Chat[] arrayChats = gson.fromJson(data, Chat[].class);
-               
+
                 return arrayChats;
-            }else{
+            } else {
                 return null;
             }
-            
-        }catch (IOException err) {
+
+        } catch (IOException err) {
             System.out.println(err);
             return null;
-        }         
-        
-    } 
-    
-    public static boolean AgregarAmigoChat(String token, String email){
-        try{
+        }
+
+    }
+
+    public static Chat obtenerMensajes(String chatId, String token) {
+        try {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url("http://127.0.0.1:3000/api/v1/user/chat/" + chatId)
+                    .get()
+                    .addHeader("Content-type", "aplication/json")
+                    .addHeader("Authorization", "Bearer " + token)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            String data = response.body().string();
+            
+            
+            System.out.println(data);
+            if (response.code() == 200) {
+                Gson gson = new Gson();
+                Chat chat = gson.fromJson(data, Chat.class);
+                return chat;
+            } else {
+                return null;
+            }
+
+        } catch (IOException err) {
+            System.out.println(err);
+            
+            return null;
+        }
+    }
+
+    public static boolean AgregarAmigoChat(String token, String email) {
+        try {
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
             String jbo = "{\n"
@@ -136,17 +166,17 @@ public class Server {
                     .url("http://localhost:3000/api/v1/user/friend/add")
                     .method("POST", body)
                     .addHeader("Content-Type", "application/json")
-                    .addHeader("Authorization", "Bearer "+token)
+                    .addHeader("Authorization", "Bearer " + token)
                     .build();
             Response response = client.newCall(req).execute();
-            
-            if(response.code() == 200){
-                 return true;
-            }else{
+
+            if (response.code() == 200) {
+                return true;
+            } else {
                 return false;
             }
-        }catch (IOException err) {
+        } catch (IOException err) {
             return false;
-        }   
+        }
     }
 }

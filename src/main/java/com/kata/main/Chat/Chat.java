@@ -6,11 +6,28 @@ package com.kata.main.Chat;
 
 
 public class Chat {
+
+ 
     private String _id;
     private String name;
     private boolean duo;
     private Member[] members;
+    private Message[] messages;
 
+       /**
+     * @return the messages
+     */
+    public Message[] getMessages() {
+        return messages;
+    }
+
+    /**
+     * @param messages the messages to set
+     */
+    public void setMessages(Message[] messages) {
+        this.messages = messages;
+    }
+    
     public void setId(String _id) {
         this._id = _id;
     }
