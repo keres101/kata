@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
         usuario = user;
         MostrarBotonesChats(usuario);
 
-        URI uri = URI.create("https://hermod-orpin.vercel.app");
+        URI uri = URI.create("https://hermod-keres101.vercel.app/");
         IO.Options options = IO.Options.builder().build();
         socket = IO.socket(uri, options);
         socket.connect();

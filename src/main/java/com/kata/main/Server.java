@@ -20,7 +20,7 @@ import okhttp3.Response;
  */
 public class Server {
 
-    private static String url = "https://hermod-orpin.vercel.app/api/v1";
+    private static String url = "https://hermod-keres101.vercel.app/api/v1";
 
     public static void crearUsuario(String fullName, String email, String nickname, String password) {
         try {
