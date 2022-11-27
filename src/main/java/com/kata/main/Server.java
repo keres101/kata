@@ -20,7 +20,7 @@ import okhttp3.Response;
  */
 public class Server {
 
-    private static String url = "http://localhost:3000/api/v1";
+    private static String url = "https://hermod-orpin.vercel.app/api/v1";
 
     public static void crearUsuario(String fullName, String email, String nickname, String password) {
         try {
@@ -97,7 +97,7 @@ public class Server {
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://127.0.0.1:3000/api/v1/user/chat")
+                    .url(url+"/user/chat")
                     .get()
                     .addHeader("Content-type", "aplication/json")
                     .addHeader("Authorization", "Bearer " + token)
@@ -126,7 +126,7 @@ public class Server {
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://127.0.0.1:3000/api/v1/user/chat/" + chatId)
+                    .url(url+"/user/chat/" + chatId)
                     .get()
                     .addHeader("Content-type", "aplication/json")
                     .addHeader("Authorization", "Bearer " + token)
@@ -162,7 +162,7 @@ public class Server {
                     jbo
             );
             Request req = new Request.Builder()
-                    .url("http://localhost:3000/api/v1/user/friend/add")
+                    .url(url+"/user/friend/add")
                     .method("POST", body)
                     .addHeader("Content-Type", "application/json")
                     .addHeader("Authorization", "Bearer " + token)
@@ -203,7 +203,7 @@ public class Server {
                     jbo
             );
             Request req = new Request.Builder()
-                    .url("http://localhost:3000/api/v1/user/chat/create")
+                    .url(url+"/user/chat/create")
                     .method("POST", body)
                     .addHeader("Content-Type", "application/json")
                     .addHeader("Authorization", "Bearer " + token)
